@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Birthday Aoi!</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffe4ec, #fff0f5);
+      text-align: center;
+      overflow-x: hidden;
+      padding-bottom: 100px;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #d63384;
+      margin-top: 40px;
+      animation: fadeIn 2s ease;
+    }
+
+    .section {
+      background: rgba(255, 255, 255, 0.7);
+      margin: 30px auto;
+      padding: 30px;
+      border-radius: 25px;
+      max-width: 700px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.05);
+      animation: fadeIn 1.5s ease;
+    }
+
+    .btn {
+      padding: 14px 30px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 30px;
+      background-color: #ff69b4;
+      color: white;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #ff4081;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .quiz {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .quiz-question {
+      margin-bottom: 20px;
+    }
+
+    .quiz-question p {
+      font-weight: bold;
+    }
+
+    .quiz-question button {
+      display: block;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 15px;
+      border: 1px solid #ccc;
+      background: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .quiz-question button:hover {
+      background: #ffe6f0;
+    }
+
+    .balloon {
+      position: absolute;
+      width: 40px;
+      height: 60px;
+      background-color: pink;
+      border-radius: 50% 50% 50% 50%;
+      animation: floatBalloon 10s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatBalloon {
+      0% { bottom: -100px; }
+      100% { bottom: 120%; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: hsl(0, 100%, 70%);
+      opacity: 0.7;
+      animation: fall 3s linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+
+    audio {
+      display: none;
+    }
+
+    li {
+      font-size: 1.1em;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎉 Happy Birthday, Aoi! 🎉</h1>
+
+  <div class="section">
+    <p>Hi Aoi! I made this cozy, fun little webpage to celebrate your special day 🎂</p>
+    <button class="btn" onclick="toggleMusic()">🎵 Play / Pause Music</button>
+    <button class="btn" onclick="startConfetti()">🎊 Party Mode</button>
+  </div>
+
+  <div class="section">
+    <h2>🎁 Click to Reveal a Surprise Message!</h2>
+    <button class="btn" onclick="document.getElementById('message').classList.remove('hidden')">Reveal 🎈</button>
+    <div id="message" class="hidden">
+      <p>You bring calm, creativity, and kindness into the world. Hope your birthday is filled with joy and chocolate cake 🍰!</p>
+      <p>— from Arnal ✨</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>🎉 Quick Birthday Quiz!</h2>
+    <div class="quiz">
+      <div class="quiz-question">
+        <p>What is Aoi’s birthday month?</p>
+        <button onclick="alert('Correct! 🎉')">July</button>
+        <button onclick="alert('Oops! Try again 😊')">June</button>
+      </div>
+      <div class="quiz-question">
+        <p>Which of these is a birthday tradition?</p>
+        <button onclick="alert('Correct! 🎁')">Cake & candles</button>
+        <button onclick="alert('Nice try 😄')">Throwing socks</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>🌈 3 Friendly Wishes for You!</h2>
+    <ul>
+      <li>✨ May your year be full of discovery and joy.</li>
+      <li>📚 Keep inspiring others just by being you.</li>
+      <li>🎨 Never stop creating and dreaming big!</li>
+    </ul>
+  </div>
+
+  <!-- Balloons -->
+  <script>
+    for (let i = 0; i < 25; i++) {
+      const balloon = document.createElement("div");
+      balloon.className = "balloon";
+      balloon.style.left = Math.random() * 100 + "vw";
+      balloon.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 80%)`;
+      balloon.style.animationDuration = (Math.random() * 6 + 4) + "s";
+      document.body.appendChild(balloon);
+    }
+
+    // Music
+    let musicPlaying = false;
+    const audio = new Audio("https://www.bensound.com/bensound-music/bensound-sunny.mp3");
+    function toggleMusic() {
+      if (!musicPlaying) {
+        audio.play();
+        musicPlaying = true;
+      } else {
+        audio.pause();
+        musicPlaying = false;
+      }
+    }
+
+    // Confetti
+    function startConfetti() {
+      const confetti = document.createElement("div");
+      confetti.className = "confetti";
+      for (let i = 0; i < 100; i++) {
+        const piece = document.createElement("div");
+        piece.className = "confetti-piece";
+        piece.style.left = Math.random() * 100 + "vw";
+        piece.style.top = Math.random() * 100 + "vh";
+        piece.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+        piece.style.animationDelay = Math.random() + "s";
+        confetti.appendChild(piece);
+      }
+      document.body.appendChild(confetti);
+      setTimeout(() => {
+        confetti.remove();
+      }, 3000);
+    }
+  </script>
+
+</body>
+</html>
